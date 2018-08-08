@@ -24,7 +24,7 @@ import static com.example.konrad.apzumiproject.GeneralMethods.apiResults;
 
 // Uzywamy asyncTaskow w celu pobrania danych dzieki API. Nie blokujemy glownego watku a zadanie leci sobie nezaleznie w tle
 
-public class APIdataSearcher extends AsyncTask<Object, Object, List<APIResults>> {
+public class APIdataSearcherBitbucket extends AsyncTask<Object, Object, List<APIResults>> {
     @Override
     protected List<APIResults> doInBackground(Object... params) {
         URL url = null;
@@ -55,9 +55,12 @@ public class APIdataSearcher extends AsyncTask<Object, Object, List<APIResults>>
                     JSONObject singleObjOwner = (JSONObject) obj.get("owner");
                     // Wchodzimy jeszcze glebiej wyciagajac username
                     JSONObject userName = (JSONObject) singleObjOwner.get("username");
+                    String nameOfUserStringFormat = (String) singleObjOwner.get("username");
                     JSONObject linksObject = (JSONObject) singleObjOwner.get("links");
                     JSONObject awatarObject = (JSONObject) linksObject.get("awatar");
                     JSONObject finalAwatarLink = (JSONObject) awatarObject.get("href");
+                    String finalAwatarStringFormat = (String) awatarObject.get("href");
+                    listaObiektow.add(i, new APIResults(nameOfUserStringFormat, "BITBUCKET", finalAwatarStringFormat, true));
                 }
 
 

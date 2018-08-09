@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">APZUMIPROJECT</string>
     <string name="no_internet">Please Switch On Internet Connection</string>
+    <string name="welcome">Welcome to our Bitbucket/GitHub App</string>
+    <string name="start_activity">Start App</string>
+    <string name="author">Designed by Konrad Sar Dev.</string>
 </resources>

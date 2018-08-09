@@ -48,38 +48,24 @@ public class APIdataSearcherBitbucket extends AsyncTask<Object, Object, List<API
                 JSONObject jsonObject = new JSONObject(stringBuilder.toString());
                 JSONArray valuesArray = (JSONArray) jsonObject.get("values");
                 // Przechodzimy po tablicy i wyciagamy kolejne elementy
-                List<APIResults> listaObiektow = new ArrayList<>();
+                List<APIResults> objectsList = new ArrayList<>();
                 for (int i = 0; i < valuesArray.length(); i++) {
                     JSONObject obj = (JSONObject) valuesArray.get(i);
                     // Wchodzimy jeszcze glebiej i wyciagamy konkretne dane z obiektu tablicy
                     JSONObject singleObjOwner = (JSONObject) obj.get("owner");
+                    // Wchodzimy jeden poziom glebiej i wyciagamy description
+//                    JSONObject descriptionForUser = (JSONObject) obj.get("description");
+                    String descriptionForUser = (String) obj.get("description");
                     // Wchodzimy jeszcze glebiej wyciagajac username
-                    JSONObject userName = (JSONObject) singleObjOwner.get("username");
+//                    JSONObject userName = (JSONObject) singleObjOwner.get("username");
                     String nameOfUserStringFormat = (String) singleObjOwner.get("username");
                     JSONObject linksObject = (JSONObject) singleObjOwner.get("links");
-                    JSONObject awatarObject = (JSONObject) linksObject.get("awatar");
-                    JSONObject finalAwatarLink = (JSONObject) awatarObject.get("href");
+                    JSONObject awatarObject = (JSONObject) linksObject.get("avatar");
+//                    JSONObject finalAwatarLink = (JSONObject) awatarObject.get("href");
                     String finalAwatarStringFormat = (String) awatarObject.get("href");
-                    listaObiektow.add(i, new APIResults(nameOfUserStringFormat, "BITBUCKET", finalAwatarStringFormat, true));
+                    objectsList.add(i, new APIResults(nameOfUserStringFormat, "BITBUCKET", finalAwatarStringFormat, true, descriptionForUser));
+                    apiResults.add(i, objectsList.get(i));
                 }
-
-
-
-                JSONArray jsonArray = new JSONArray(stringBuilder.toString());
-                List<APIResults> preParse = new ArrayList<>();
-                for (int i = 0; i < jsonArray.length(); i++) {
-                    JSONObject obj = (JSONObject) jsonArray.get(i);
-                    JSONObject singleObjId = (JSONObject) obj;
-
-
-
-
-
-
-
-
-
-/
             } else {
                 System.out.println("tabla nie obsluzona");
             }
@@ -89,23 +75,9 @@ public class APIdataSearcherBitbucket extends AsyncTask<Object, Object, List<API
             e.printStackTrace();
         } catch (JSONException e) {
             e.printStackTrace();
-        }
-        return null;
-    } catch (IOException e) {
-            e.printStackTrace();
-        } catch (JSONException e) {
-            e.printStackTrace();
-        } catch (ProtocolException e) {
-            e.printStackTrace();
-        } catch (MalformedURLException e) {
+        }catch (RuntimeException e) {
             e.printStackTrace();
         }
-    } catch (IOException e) {
-            e.printStackTrace();
-        } catch (JSONException e) {
-            e.printStackTrace();
-        } catch (ProtocolException e) {
-            e.printStackTrace();
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        }
+        return apiResults;
+    }
+}

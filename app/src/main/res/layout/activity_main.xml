@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -9,32 +9,31 @@
 
 
     <FrameLayout
+        android:id="@+id/frame"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_weight="0.5">
+        >
         <!--<android.support.v7.widget.RecyclerView-->
-            <!--xmlns:android="http://schemas.android.com/apk/res/android"-->
-            <!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
-            <!--xmlns:tools="http://schemas.android.com/tools"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="match_parent"-->
-            <!--tools:context="com.example.konrad.applicationsecond.RecyclerViewActivity"-->
-            <!--android:id="@+id/mojRecyclerView2"-->
-            <!--android:layout_marginTop="?attr/actionBarSize"-->
-            <!--android:layout_marginBottom="55dp"-->
-            <!--/>-->
+        <!--xmlns:android="http://schemas.android.com/apk/res/android"-->
+        <!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
+        <!--xmlns:tools="http://schemas.android.com/tools"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--tools:context="com.example.konrad.applicationsecond.RecyclerViewActivity"-->
+        <!--android:id="@+id/mojRecyclerView2"-->
+        <!--android:layout_marginTop="?attr/actionBarSize"-->
+        <!--android:layout_marginBottom="55dp"-->
+        <!--/>-->
 
 
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/recyclerForAPIData"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="@dimen/upperDimenForRecyclerView"
-                android:layout_marginBottom="@dimen/bottomDimenForRecyclerView"
-                >
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerForAPIData"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="@dimen/bottomDimenForRecyclerView"
+            android:layout_marginTop="@dimen/upperDimenForRecyclerView">
 
-            </android.support.v7.widget.RecyclerView>
-
+        </android.support.v7.widget.RecyclerView>
 
 
     </FrameLayout>
@@ -42,9 +41,58 @@
     <FrameLayout
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_weight="0.5">
+        android:layout_marginLeft="160dp">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/userPhotoSplitView"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_margin="23dp" />
+
+            <TextView
+                android:id="@+id/userNameSplitView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/repositoryNameSplitView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/descriptionSplitView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
 
     </FrameLayout>
 
 
-</LinearLayout>
+        android:layout_gravity="bottom">
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/floatingbtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_marginBottom="8dp"
+            android:layout_marginRight="8dp"
+            android:src="@drawable/sorter"
+            />
+
+
+
+
+
+</android.support.design.widget.CoordinatorLayout>

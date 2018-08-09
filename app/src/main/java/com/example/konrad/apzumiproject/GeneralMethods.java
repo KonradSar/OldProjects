@@ -9,4 +9,10 @@ import java.util.List;
 
 public class GeneralMethods {
     public static List<APIResults> apiResults = new ArrayList<>();
+    public static List<APIResults> apiResultsSorted = new ArrayList<>();
+    public static List<APIResults> apiResultsGitHub = new ArrayList<>();
+    public static String elementNameForSplitView = "s";
+    public static String repositoryNameForSplitView = "";
+    public static int position;
+    public static boolean changeImage = false;
 }

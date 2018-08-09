@@ -9,12 +9,22 @@ public class APIResults {
     public String repositoryName;
     public String avatarSource;
     public boolean isBitBucketResource;
+    public String description;
 
-    public APIResults(String userName, String repositoryName, String avatarSource, boolean isBitBucketResource) {
+    public APIResults(String userName, String repositoryName, String avatarSource, boolean isBitBucketResource, String description) {
         this.userName = userName;
         this.repositoryName = repositoryName;
         this.avatarSource = avatarSource;
         this.isBitBucketResource = isBitBucketResource;
+        this.description = description;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getUserName() {

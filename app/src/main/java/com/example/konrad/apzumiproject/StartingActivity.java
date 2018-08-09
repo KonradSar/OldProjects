@@ -1,6 +1,10 @@
 package com.example.konrad.apzumiproject;
 
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -27,37 +31,49 @@ public class StartingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_starting);
         ButterKnife.bind(this);
-        Button fab = (Button) findViewById(R.id.startbtn);
+        Button startBtn = (Button) findViewById(R.id.startbtn);
 
-        fab.setOnClickListener(new View.OnClickListener() {
+        startBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AsyncTask<Object, Object, List<APIResults>> execute = new APIdataSearcher().execute();
-                final List<APIResults> mojaLista;
-                try {
-                    mojaLista = execute.get();
-                    final List<String> listaaaa = new ArrayList<>();
-                    final List<String> listForAdapter = new ArrayList<>();
-                    final List<Double> exchangeRateList = new ArrayList<>();
-//                for (Currencies mojItem : mojaLista) {
-//                    listaaaa.add(mojItem.getCode() + " : " + mojItem.getValue() + " PLN");
-//                    listForAdapter.add(mojItem.getCode());
-//                    exchangeRateList.add(mojItem.getValue());
-//                    NaszeMetody.exchangeRates = exchangeRateList;
-//                    NaszeMetody.menuCurrencies = listForAdapter;
-//                    zapiszDoPamieciListeWalut(listForAdapter);
-//                }
-
-
-                } catch (InterruptedException e) {
+                if(isNetworkAvailable()){
+                    AsyncTask<Object, Object, List<APIResults>> execute = new APIdataSearcherBitbucket().execute();
+                    try {
+                    final List<APIResults> mojaLista = execute.get();
+                    } catch (InterruptedException e) {
                     e.printStackTrace();
                 } catch (ExecutionException e) {
                     e.printStackTrace();
                 }
+
+                    AsyncTask<Object, Object, List<APIResults>> executeSec = new APIdatasearcherGitHub().execute();
+                    try {
+                        final List<APIResults> mojaListaSec = executeSec.get();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    } catch (ExecutionException e) {
+                        e.printStackTrace();
+                    }
+
+                    Intent intent = new Intent(StartingActivity.this, MainActivity.class);
+                    startActivity(intent);
+                }else{
+                    Toast.makeText(getApplicationContext(), R.string.no_internet, Toast.LENGTH_LONG).show();
+
+                }
+
+
             }
         });
 
     }
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+    }
+
 }
 
 
